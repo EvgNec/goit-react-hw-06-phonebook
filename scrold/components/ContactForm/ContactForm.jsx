@@ -7,7 +7,7 @@ const ContactForm = ({ creatContact }) => {
   const [number, setNumber] = useState('');
 
   const handleChange = ({ target }) => {
-    const { name, value } = target;
+   const { name, value } = target;
     switch (name) {
       case 'name': {
         setName(value);
