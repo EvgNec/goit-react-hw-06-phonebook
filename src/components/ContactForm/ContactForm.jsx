@@ -1,40 +1,21 @@
-import { useState } from 'react';
 import { Input, AddButton, Form, Title } from './ContactForm.styled';
-import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { addContact } from 'redux/contactsSlice';
 
-const ContactForm = ({ creatContact }) => {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+const ContactForm = () => {
+  const dispatch = useDispatch();
 
-  const handleChange = ({ target }) => {
-    const { name, value } = target;
-    switch (name) {
-      case 'name': {
-        setName(value);
-        break;
-      }
-      case 'number': {
-        setNumber(value);
-        break;
-      }
-
-      default: {
-        console.log('There is no such input like that');
-      }
-    }
+  const handleSubmit = e => {
+    e.preventDefault();
+    const { name, number } = e.target;
+    dispatch(addContact(name.value, number.value));
+    e.target.reset();
   };
 
   return (
     <>
       <Title>Phonebook</Title>
-      <Form
-        onSubmit={evt => {
-          evt.preventDefault(); // відміняємо стандартну поведінку браузера
-          creatContact({ name, number }); // додаємо контакт
-          setName(''); // очищаємо поля
-          setNumber(''); // очищаємо поля
-        }}
-      >
+      <Form onSubmit={handleSubmit}>
         <Input
           type="text"
           name="name"
@@ -42,8 +23,6 @@ const ContactForm = ({ creatContact }) => {
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
           placeholder="Name"
-          onChange={handleChange}
-          value={name}
         />
         <Input
           type="tel"
@@ -52,17 +31,11 @@ const ContactForm = ({ creatContact }) => {
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
           placeholder="Number"
-          onChange={handleChange}
-          value={number}
         />
-        <AddButton type="submit">Add contact</AddButton>
+        <AddButton type="submit">Add contacts</AddButton>
       </Form>
     </>
   );
 };
 
 export default ContactForm;
-
-ContactForm.propTypes = {
-  creatContact: PropTypes.func.isRequired,
-};

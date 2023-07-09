@@ -65,8 +65,3 @@ export const DeleteBtn = styled.button`
     background: red;
   }
 `;
-
-export const Message = styled.p`
-  font-size: 30px;
-  font-weight: 400;
-`;

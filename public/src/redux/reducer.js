@@ -5,8 +5,8 @@ const initialState = {
 
 const contactsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'CONTACTS / ADD_TO_CONTACT':
-      console.log('action.type', action.type);
+    case 'CONTACTS/ADD_TO_CONTACT':
+          console.log('action.type', action);          
       return state;
     case 'CONTACTS/REMOVE_FROM_CONTACT':
       return state;

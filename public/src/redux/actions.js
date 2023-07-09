@@ -1,4 +1,4 @@
-export const creatContact = contact => {
+export const addContact = contact => {
   return {
     type: 'CONTACTS/ADD_TO_CONTACT',
     payload: contact,
